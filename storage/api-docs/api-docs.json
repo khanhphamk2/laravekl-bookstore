@@ -1,0 +1,1375 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Docs BookStore API",
+        "description": "BookStore API Server",
+        "contact": {
+            "email": "longuit2002@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api/",
+            "description": "BookStore API"
+        }
+    ],
+    "paths": {
+        "/auth/register": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Register new user",
+                "description": "Returns token for new user",
+                "operationId": "register",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RegisterUserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Login user",
+                "description": "Returns token for user",
+                "operationId": "login",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginUserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/discounts": {
+            "get": {
+                "tags": [
+                    "discounts"
+                ],
+                "summary": "Get list of discounts",
+                "description": "Returns list of discounts",
+                "operationId": "getDiscountsList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DiscountResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "discounts"
+                ],
+                "summary": "Store new discount",
+                "description": "Returns discount data",
+                "operationId": "storeDiscount",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreDiscountRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DiscountResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/discounts/{id}": {
+            "get": {
+                "tags": [
+                    "discounts"
+                ],
+                "summary": "Get discount information",
+                "description": "Returns discount data",
+                "operationId": "getDiscountById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Discount id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DiscountResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "discounts"
+                ],
+                "summary": "Update existing discount",
+                "description": "Returns updated discount data",
+                "operationId": "updateDiscount",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Discount id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateDiscountRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DiscountResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "discounts"
+                ],
+                "summary": "Delete existing discount",
+                "description": "Deletes a record and returns no content",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Discount id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/genres": {
+            "get": {
+                "tags": [
+                    "genres"
+                ],
+                "summary": "Get list of genres",
+                "description": "Returns list of genres",
+                "operationId": "getGenresList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GenreResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "genres"
+                ],
+                "summary": "Store new genre",
+                "description": "Returns genre data",
+                "operationId": "storeGenre",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreGenreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GenreResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/genres/{id}": {
+            "get": {
+                "tags": [
+                    "genres"
+                ],
+                "summary": "Get genre information",
+                "description": "Returns genre data",
+                "operationId": "getGenreById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Genre id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GenreResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "genres"
+                ],
+                "summary": "Update existing genre",
+                "description": "Returns updated genre data",
+                "operationId": "updateGenre",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Genre id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateGenreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GenreResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "genres"
+                ],
+                "summary": "Delete existing genre",
+                "description": "Deletes a record and returns no content",
+                "operationId": "deleteGenre",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Genre id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/publishers": {
+            "get": {
+                "tags": [
+                    "publishers"
+                ],
+                "summary": "Get list of publishers",
+                "description": "Returns list of publishers",
+                "operationId": "getpublishersList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PublisherResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "publishers"
+                ],
+                "summary": "Store new publisher",
+                "description": "Returns publisher data",
+                "operationId": "storePublisher",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StorePublisherRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PublisherResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/publishers/{id}": {
+            "get": {
+                "tags": [
+                    "publishers"
+                ],
+                "summary": "Get publisher information",
+                "description": "Returns publisher data",
+                "operationId": "getPublisherById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Publisher id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PublisherResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "publishers"
+                ],
+                "summary": "Update existing publisher",
+                "description": "Returns updated publisher data",
+                "operationId": "updatePublisher",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Publisher id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePublisherRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PublisherResource"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "publishers"
+                ],
+                "summary": "Delete existing publisher",
+                "description": "Deletes a record and returns no content",
+                "operationId": "deletePublisher",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Publisher id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "reviews/{book}/": {
+            "get": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "Get list reviews of a book",
+                "description": "Return list reviews of a book",
+                "operationId": "getReviewsListByIdBook",
+                "parameters": [
+                    {
+                        "name": "book",
+                        "in": "path",
+                        "description": "Book id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+        "/admin/users": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Get list of users",
+                "description": "Returns list of users",
+                "operationId": "getProfile",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserInfoResource"
+                                }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReviewResource"
+                                }
+                            }
+                        }
+                                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "reviews/{book}/review": {
+            "get": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "Get review of a book",
+                "description": "Return review of a book",
+                "operationId": "getReviewByIdBook",
+                "parameters": [
+                    {
+                        "name": "book",
+                        "in": "path",
+                        "description": "Book id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReviewResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "Create or update review of a book",
+                "description": "Returns Created or updated review of a book",
+                "operationId": "createOrUpdateReview",
+                "parameters": [
+                    {
+                        "name": "book",
+                        "in": "path",
+                        "description": "Book id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateOrUpdateReviewRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReviewResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "reviews/{book}/{review}": {
+            "delete": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "Delete review",
+                "description": "Delete review",
+                "operationId": "deleteReviewById",
+                "parameters": [
+                    {
+                        "name": "book",
+                        "in": "path",
+                        "description": "Book id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "review",
+                        "in": "path",
+                        "description": "Review id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        }
+    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CreateOrUpdateReviewRequest": {
+                "title": "Create or Update Review request",
+                "description": "Create or Update Review request body data",
+                "required": [
+                    "rating"
+                ],
+                "properties": {
+                    "rating": {
+                        "description": "Rating of the book",
+                        "type": "float",
+                        "example": "4.5"
+                    },
+                    "comment": {
+                        "description": "Comment of the book",
+                        "type": "string",
+                        "example": "This is a comment"
+                    }
+                },
+                "type": "object"
+            },
+            "LoginUserRequest": {
+                "title": "Login User request",
+                "description": "Login User request body data",
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "email": {
+                        "description": "Email of the new user",
+                        "type": "string",
+                        "example": "example@example.com"
+                    },
+                    "password": {
+                        "description": "Password of the new user",
+                        "type": "string",
+                        "example": "123456"
+                    }
+                },
+                "type": "object"
+            },
+            "Discount": {
+                "title": "Discount",
+                "description": "Discount model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "Name",
+                        "description": "Name",
+                        "type": "string",
+                        "example": "A nice discount"
+                    },
+                    "value": {
+                        "title": "Value",
+                        "description": "Value",
+                        "type": "number"
+                    },
+                    "start_date": {
+                        "title": "start_date",
+                        "description": "start_date",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "end_date": {
+                        "title": "end_date",
+                        "description": "end_date of event",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "quantity": {
+                        "title": "quantity",
+                        "description": "quantity of discount",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "description": {
+                        "title": "Description",
+                        "description": "Description",
+                        "type": "string",
+                        "example": "A nice description"
+                    }
+                },
+                "type": "object"
+            },
+            "Genre": {
+                "title": "Genre",
+                "description": "Genre model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "Name",
+                        "description": "Name",
+                        "type": "string"
+                    },
+                    "description": {
+                        "title": "Description",
+                        "description": "Description",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "title": "User",
+                "description": "User model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "Name",
+                        "description": "Name",
+                        "type": "string"
+                    },
+                    "email": {
+                        "title": "Email",
+                        "description": "Email",
+                        "type": "string",
+                        "format": "email"
+                    },
+                    "created_at": {
+                        "title": "Created at",
+                        "description": "Created at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "updated_at": {
+                        "title": "Updated at",
+                        "description": "Updated at",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2020-01-27 17:50:45"
+                    }
+                },
+                "type": "object"
+            },
+            "RegisterUserRequest": {
+                "title": "Register User request",
+                "description": "Register User request body data",
+                "required": [
+                    "name",
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Name of the new user",
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "email": {
+                        "description": "Email of the new user",
+                        "type": "string",
+                        "format": "email",
+                        "example": "example@example.com"
+                    },
+                    "password": {
+                        "description": "Password of the new user",
+                        "type": "string",
+                        "example": "123456"
+                    }
+                },
+                "type": "object"
+            },
+            "UserResource": {
+                "title": "User Authentication",
+                "description": "User resource",
+                "properties": {
+                    "access_token": {
+                        "description": "Access token",
+                        "type": "string"
+                    },
+                    "token_type": {
+                        "description": "Token type",
+                        "type": "string",
+                        "example": "bearer"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/User"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "UserResource"
+                }
+            },
+            "DiscountResource": {
+                "title": "DiscountResource",
+                "description": "Discount resource",
+                "properties": {
+                    "discount": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Discount"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "DiscountResource"
+                }
+            },
+            "GenreResource": {
+                "title": "GenreResource",
+                "description": "Genre resource",
+                "properties": {
+                    "genre": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Genre"
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "GenreResource"
+                }
+            },
+            "PublisherResource": {
+                "title": "PublisherResource",
+                "description": "Publisher resource",
+                "properties": {
+                    "publisher": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "ref": null
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "PublisherResource"
+                }
+            },
+            "ReviewResource": {
+                "title": "ReviewResource",
+                "description": "Review resource",
+                "properties": {
+                    "Review": {
+                        "title": "Data",
+                        "description": "Data wrapper",
+                        "type": "array",
+                        "items": {
+                            "ref": null
+                        }
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "ReviewResource"
+                }
+            },
+            "StoreDiscountRequest": {
+                "title": "Store Discount request",
+                "description": "Store Discount request body data",
+                "required": [
+                    "name, value"
+                ],
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "Name of the new discount",
+                        "type": "string",
+                        "example": "A nice discount"
+                    },
+                    "value": {
+                        "title": "value",
+                        "description": "Value of the new discount",
+                        "type": "number",
+                        "format": "float",
+                        "example": "10"
+                    },
+                    "start_date": {
+                        "title": "start_date",
+                        "description": "Start date of the new discount",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "end_date": {
+                        "title": "end_date",
+                        "description": "End date of the new discount",
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2020-01-27 17:50:45"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Description of the new discount",
+                        "type": "string",
+                        "example": "A nice description"
+                    }
+                },
+                "type": "object"
+            },
+            "StoreGenreRequest": {
+                "title": "Store Genre request",
+                "description": "Store Genre request body data",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "Name of the new genre",
+                        "type": "string",
+                        "example": "A nice genre"
+                    },
+                    "": {
+                        "title": "description",
+                        "description": "Description of the new genre",
+                        "type": "string",
+                        "example": "A nice description"
+                    }
+                },
+                "type": "object"
+            },
+            "StorePublisherRequest": {
+                "title": "Store Publisher request",
+                "description": "Store Publisher request body data",
+                "required": [
+                    "name, address, phone_number"
+                ],
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "Name of the new publisher",
+                        "type": "string",
+                        "example": "A nice publisher"
+                    },
+                    "address": {
+                        "title": "address",
+                        "description": "Address of the new publisher",
+                        "type": "string",
+                        "example": "A nice address"
+                    },
+                    "phone_number": {
+                        "title": "phone_number",
+                        "description": "Phone number of the new publisher",
+                        "type": "string",
+                        "example": "0123456789"
+                    },
+                    "": {
+                        "title": "description",
+                        "description": "Description of the new publisher",
+                        "type": "string",
+                        "example": "A nice description"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateDiscountRequest": {
+                "title": "Update Discount request",
+                "description": "Update Discount request body data",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "Name of the new genre",
+                        "type": "string",
+                        "example": "A nice genre"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Description of the new genre",
+                        "type": "string",
+                        "example": "A nice description"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateGenreRequest": {
+                "title": "Update Genre request",
+                "description": "Update Genre request body data",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "Name of the new genre",
+                        "type": "string",
+                        "example": "A nice genre"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Description of the new genre",
+                        "type": "string",
+                        "example": "A nice description"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdatePublisherRequest": {
+                "title": "Update Publisher request",
+                "description": "Update Publisher request body data",
+                "properties": {
+                    "name": {
+                        "title": "name",
+                        "description": "Name of the new publisher",
+                        "type": "string",
+                        "example": "A nice publisher"
+                    },
+                    "address": {
+                        "title": "address",
+                        "description": "Address of the new publisher",
+                        "type": "string",
+                        "example": "A nice address"
+                    },
+                    "phone_number": {
+                        "title": "phone_number",
+                        "description": "Phone number of the new publisher",
+                        "type": "string",
+                        "example": "0123456789"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Description of the new publisher",
+                        "type": "string",
+                        "example": "A nice description"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearer_token": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Projects",
+            "description": "API Endpoints of Projects"
+        }
+    ],
+    "security": [
+        {
+            "bearer_token": []
+        }
+    ]
+}
